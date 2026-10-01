@@ -5,18 +5,9 @@
 // (See accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 //
-#if defined(__cpp_modules) && !defined(BOOST_UT_DISABLE_MODULE)
-export module boost.ut;
-export import std;
-#define BOOST_UT_EXPORT export
-#else
+// module declaration can't be conditional (P1857), module branch removed
 #pragma once
 #define BOOST_UT_EXPORT
-#endif
-
-#if __has_include(<iso646.h>)
-#include <iso646.h>  // and, or, not, ...
-#endif
 
 #include <version>
 #if defined(_MSC_VER)
