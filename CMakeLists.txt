@@ -48,8 +48,11 @@ if(NOT CMAKE_SKIP_INSTALL_RULES)
   endif()
 endif()
 
-add_library(ut)
+# always static: the library has no export macros, so as a shared library it breaks under
+# -fvisibility=hidden or BUILD_SHARED_LIBS=ON (e.g. KDECompilerSettings) with undefined cfg:: symbols
+add_library(ut STATIC)
 target_sources(ut PRIVATE source/ut.cc)
+set_target_properties(ut PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 if(BOOST_UT_ALLOW_CPM_USE AND PROJECT_IS_TOP_LEVEL)
 add_library(Boost::ut ALIAS ut)
